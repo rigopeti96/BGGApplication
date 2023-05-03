@@ -12,11 +12,6 @@ import hu.bme.aut.android.bggapplication.databinding.MainFragmentBinding
 
 class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
@@ -32,4 +27,7 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
     }
 
+    companion object {
+        fun newInstance() = MainFragment()
+    }
 }
