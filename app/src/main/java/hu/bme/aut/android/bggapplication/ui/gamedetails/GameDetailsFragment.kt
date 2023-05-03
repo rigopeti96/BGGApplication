@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hu.bme.aut.android.bggapplication.R
-import hu.bme.aut.android.bggapplication.databinding.FragmentGameListBinding
 import hu.bme.aut.android.bggapplication.databinding.GameDetailsFragmentBinding
 import hu.bme.aut.android.bggapplication.ui.gamelist.GameListViewModel
 import hu.bme.aut.android.bggapplication.ui.main.MainFragment
