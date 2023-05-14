@@ -5,7 +5,7 @@ import org.simpleframework.xml.Path
 import org.simpleframework.xml.Root
 
 @Root(name = "items", strict = false)
-data class CollectiolListByOwnerName(
+data class CollectionListByOwnerName(
     @field:ElementList(name = "item", inline = true, required = false)
     @param:ElementList(name = "item", inline = true, required = false)
     @field:Path("items")
