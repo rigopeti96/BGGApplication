@@ -1,9 +1,9 @@
-package hu.bme.aut.android.bggapplication
+package hu.bme.aut.android.brewdogapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import hu.bme.aut.android.bggapplication.databinding.MainActivityBinding
-import hu.bme.aut.android.bggapplication.ui.main.MainFragment
+import hu.bme.aut.android.brewdogapplication.databinding.MainActivityBinding
+import hu.bme.aut.android.brewdogapplication.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: MainActivityBinding

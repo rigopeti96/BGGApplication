@@ -1,4 +1,4 @@
-package hu.bme.aut.android.bggapplication.ui.main
+package hu.bme.aut.android.brewdogapplication.ui.main
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
@@ -7,18 +7,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.util.Log
-import android.util.Xml
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import hu.bme.aut.android.bggapplication.R
-import hu.bme.aut.android.bggapplication.data.SearchListByName
-import hu.bme.aut.android.bggapplication.databinding.MainFragmentBinding
-import hu.bme.aut.android.bggapplication.network.BoardGameGeekAPI
-import hu.bme.aut.android.bggapplication.network.NetworkManager
-import okhttp3.ResponseBody
+import hu.bme.aut.android.brewdogapplication.data.BeerListData
+import hu.bme.aut.android.brewdogapplication.databinding.MainFragmentBinding
+import hu.bme.aut.android.brewdogapplication.network.NetworkManager
 
 class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
@@ -39,12 +35,12 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnUser.setOnClickListener {
-            getCollectionList()
+        binding.btnFoodName.setOnClickListener {
+            getBeerByFoodName()
         }
 
-        binding.btnGame.setOnClickListener {
-            getGameList()
+        binding.btnBeerName.setOnClickListener {
+            getBeerByName()
         }
     }
 
@@ -52,22 +48,24 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private fun getCollectionList(){
-        NetworkManager.getCollectionList(binding.etUser.text.toString()).enqueue(object:
-            Callback<ResponseBody?>{
+    private fun getBeerByFoodName(){
+        NetworkManager.getBeerListByFood(binding.etUser.text.toString()).enqueue(object:
+            Callback<List<BeerListData>?>{
                 override fun onResponse(
-                    call: Call<ResponseBody?>,
-                    response: Response<ResponseBody?>
+                    call: Call<List<BeerListData>?>,
+                    response: Response<List<BeerListData>?>
                 ) {
                     if(response.isSuccessful){
-                        Log.d("Response",response.body().toString())
+                        Log.d("Response",response.headers().toString())
+                        val cl: String = response.body().toString()
+                        Log.d("Response body",cl.toString())
                     } else {
                         Log.d("Response",response.body().toString())
                         Toast.makeText(requireContext(), "Error: " + response.message(), Toast.LENGTH_LONG).show()
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+                override fun onFailure(call: Call<List<BeerListData>?>, t: Throwable) {
                     t.printStackTrace()
                     Toast.makeText(requireContext(), "Network request error occured, check LOG", Toast.LENGTH_LONG).show()
                 }
@@ -76,23 +74,24 @@ class MainFragment : Fragment() {
         )
     }
 
-    private fun getGameList(){
-        NetworkManager.getGameList(binding.etGame.text.toString()).enqueue(object:
-            Callback<ResponseBody?>{
+    private fun getBeerByName(){
+        NetworkManager.getBeerListByName(binding.etGame.text.toString()).enqueue(object:
+            Callback<List<BeerListData>?>{
             override fun onResponse(
-                call: Call<ResponseBody?>,
-                response: Response<ResponseBody?>
+                call: Call<List<BeerListData>?>,
+                response: Response<List<BeerListData>?>
             )
             {
+                Log.d("Response header",response.headers().toString())
                 if(response.isSuccessful){
-                    Log.d("Response",response.raw().toString())
+                    Log.d("Response",response.body().toString())
                 } else {
                     Log.d("Response",response.body().toString())
                     Toast.makeText(requireContext(), "Error: " + response.message(), Toast.LENGTH_LONG).show()
                 }
             }
 
-            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+            override fun onFailure(call: Call<List<BeerListData>?>, t: Throwable) {
                 t.printStackTrace()
                 Toast.makeText(requireContext(), "Network request error occured, check LOG", Toast.LENGTH_LONG).show()
             }

@@ -11,16 +11,16 @@
         android:id="@+id/etGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Game name"
+        android:hint="Beer name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnGame"
+        android:id="@+id/btnBeerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Game name"
+        android:text="Beer name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etGame" />
@@ -29,16 +29,16 @@
         android:id="@+id/etUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"
+        android:hint="Food name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnGame"/>
+        app:layout_constraintTop_toBottomOf="@+id/btnBeerName"/>
 
     <Button
-        android:id="@+id/btnUser"
+        android:id="@+id/btnFoodName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username"
+        android:text="Food name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUser" />

@@ -1,4 +1,4 @@
-package hu.bme.aut.android.bggapplication
+package hu.bme.aut.android.brewdogapplication
 
 import org.junit.Test
 

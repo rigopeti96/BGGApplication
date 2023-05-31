@@ -1,4 +1,4 @@
-package hu.bme.aut.android.bggapplication.ui.main
+package hu.bme.aut.android.brewdogapplication.ui.main
 
 import androidx.lifecycle.ViewModel
 

@@ -7,7 +7,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "hu.bme.aut.android.bggapplication"
+        applicationId "hu.bme.aut.android.brewdogapplication"
         minSdk 26
         targetSdk 33
         versionCode 1

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="hu.bme.aut.android.bggapplication">
+    package="hu.bme.aut.android.brewdogapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BGGApplication">
         <activity
-            android:name=".MainActivity"
+            android:name="hu.bme.aut.android.brewdogapplication.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
