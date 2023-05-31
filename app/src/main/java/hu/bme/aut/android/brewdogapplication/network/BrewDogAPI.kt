@@ -5,10 +5,10 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface BrewDogAPI {
-    @GET("beers")
+    @GET("beers/{id}")
     fun getBeerDetailsData(
         @Path("id") id: Int
-    ): Call<Any?>
+    ): Call<List<BeerData>?>
 
     @GET("beers")
     fun getBeerListByName(

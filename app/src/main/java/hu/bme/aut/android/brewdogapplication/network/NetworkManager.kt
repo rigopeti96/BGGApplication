@@ -1,5 +1,6 @@
 package hu.bme.aut.android.brewdogapplication.network
 
+import hu.bme.aut.android.brewdogapplication.data.BeerData
 import hu.bme.aut.android.brewdogapplication.data.BeerListData
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -21,7 +22,7 @@ object NetworkManager {
         BREW_DOG_API = retrofit.create(BrewDogAPI::class.java)
     }
 
-    fun getBeerById(id: Int): Call<Any?>{
+    fun getBeerById(id: Int): Call<List<BeerData>?>{
         return BREW_DOG_API.getBeerDetailsData(id)
     }
 
