@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/fragment_main">
+
+    <fragment
+        android:id="@+id/fragment_main"
+        android:name="hu.bme.aut.android.brewdogapplication.ui.main.MainFragment"
+        android:label="@string/fragment_main"
+        tools:layout="@layout/main_fragment">
+        <action
+            android:id="@+id/action_fragment_main_to_fragment_beer_list"
+            app:destination="@id/fragment_beer_list" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_beer_list"
+        android:name="hu.bme.aut.android.brewdogapplication.ui.beerlist.BeerListFragment"
+        android:label="@string/fragment_beer_list"
+        tools:layout="@layout/beer_list_fragment" >
+        <action
+            android:id="@+id/action_fragment_beer_list_to_fragment_beer_details"
+            app:destination="@id/fragment_beer_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_beer_details"
+        android:name="hu.bme.aut.android.brewdogapplication.ui.beerdetails.BeerDetailsFragment"
+        android:label="@string/fragment_beer_details"
+        tools:layout="@layout/beer_details_fragment" >
+        <action
+            android:id="@+id/action_fragment_beer_details_to_fragment_beer_list"
+            app:destination="@id/fragment_beer_list" />
+    </fragment>
+
+</navigation>
