@@ -6,17 +6,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import hu.bme.aut.android.brewdogapplication.data.BeerListData
 import java.util.ArrayList
+import android.os.Handler
+import android.os.Looper
 
 class BeerListViewModel : ViewModel() {
-    private var beerListLiveData = MutableLiveData<List<BeerListData>>()
-
-    fun getBeerDataList(): LiveData<List<BeerListData>> {
-
-        return beerListLiveData
-    }
-
-    fun setBeerDataList(actBeerList: List<BeerListData>){
-        beerListLiveData.value = actBeerList
-        Log.d("live data size", beerListLiveData.value!!.size.toString())
+    private val _beerListLiveData = MutableLiveData<List<BeerListData>>()
+    val beerListData: LiveData<List<BeerListData>>
+        get() = _beerListLiveData
+    fun updateBeerListData(beerListData: List<BeerListData>) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            _beerListLiveData.postValue(beerListData)
+        }, 5000)
     }
 }

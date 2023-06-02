@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 response: Response<List<BeerListData>?>
             ) {
                 if(response.isSuccessful){
-                    beerListViewModel.setBeerDataList(response.body()!!)
+                    beerListViewModel.updateBeerListData(response.body()!!)
                 } else {
                     Log.d("Response",response.body().toString())
                     Toast.makeText(this@MainActivity, "Error: " + response.message(), Toast.LENGTH_LONG).show()
@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         )
+        changeToBeerList()
     }
 
     fun getBeerByName(beerName: String){
@@ -88,7 +89,8 @@ class MainActivity : AppCompatActivity() {
             )
             {
                 if(response.isSuccessful){
-                    beerListViewModel.setBeerDataList(response.body()!!)
+                    beerListViewModel.updateBeerListData(response.body()!!)
+                    Log.d("Response size", response.body()!!.size.toString())
                 } else {
                     Log.d("Response",response.body().toString())
                     Toast.makeText(this@MainActivity, "Error: " + response.message(), Toast.LENGTH_LONG).show()
@@ -102,6 +104,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         )
+        changeToBeerList()
     }
 
     fun getBeerData(beerId: Int){
@@ -113,7 +116,8 @@ class MainActivity : AppCompatActivity() {
             )
             {
                 if(response.isSuccessful){
-                   beerDetailsViewModel.setBeerDataList(response.body()!!)
+                    beerDetailsViewModel.setBeerDataList(response.body()!!)
+
                 } else {
                     Log.d("Response",response.body().toString())
                     Toast.makeText(this@MainActivity, "Error: " + response.message(), Toast.LENGTH_LONG).show()

@@ -40,12 +40,10 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnFoodName.setOnClickListener {
             (activity as MainActivity).getBeerByFoodName(binding.etFoodName.text.toString())
-            (activity as MainActivity).changeToBeerList()
         }
 
         binding.btnBeerName.setOnClickListener {
             (activity as MainActivity).getBeerByName(binding.etBeerName.text.toString())
-            (activity as MainActivity).changeToBeerList()
         }
     }
 

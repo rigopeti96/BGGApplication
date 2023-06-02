@@ -16,6 +16,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <include layout="@layout/content_beerlist" />
+    <include
+        android:id="@+id/incRecycleView"
+        layout="@layout/content_beerlist" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

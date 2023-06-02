@@ -1,6 +1,7 @@
 package hu.bme.aut.android.brewdogapplication.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,5 +52,12 @@ class BeerListAdapter(private val activity: MainActivity): RecyclerView.Adapter<
 
     private fun transportToDatasheet(beerListItemId: Int){
         activity.changeToBeerDatasheet()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun addBeerItem(beerListItem: BeerListData){
+        items.add(beerListItem)
+        Log.d("Add beer item", "called")
+        notifyDataSetChanged()
     }
 }
