@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import hu.bme.aut.android.brewdogapplication.MainActivity
 import hu.bme.aut.android.brewdogapplication.databinding.BeerDetailsFragmentBinding
 import hu.bme.aut.android.brewdogapplication.network.NetworkManager
 import hu.bme.aut.android.brewdogapplication.ui.main.MainFragment
@@ -27,14 +28,20 @@ class BeerDetailsFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         viewModel = ViewModelProvider(this)[BeerDetailsViewModel::class.java]
+        (activity as MainActivity).getBeerData(1)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         NetworkManager.getBeerById(gameId)
+        binding.tvBackButton.setOnClickListener {
+            (activity as MainActivity).changeToBeerList()
+        }
     }
 
     companion object {
         fun newInstance() = MainFragment()
     }
+
+
 }

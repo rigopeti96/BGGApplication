@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.beerlist.BeerListFragment">
 
+    <TextView
+        android:id="@+id/tvBackButtonList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <include layout="@layout/content_beerlist" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

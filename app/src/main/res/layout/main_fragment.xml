@@ -8,7 +8,7 @@
     tools:context=".ui.main.MainFragment">
 
     <EditText
-        android:id="@+id/etGame"
+        android:id="@+id/etBeerName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Beer name"
@@ -23,10 +23,10 @@
         android:text="Beer name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etGame" />
+        app:layout_constraintTop_toBottomOf="@+id/etBeerName" />
 
     <EditText
-        android:id="@+id/etUser"
+        android:id="@+id/etFoodName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Food name"
@@ -41,6 +41,24 @@
         android:text="Food name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etUser" />
+        app:layout_constraintTop_toBottomOf="@+id/etFoodName" />
+
+    <ImageView
+        android:id="@+id/ivBrewDocIcon"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/brewdog_logo"
+        app:layout_constraintTop_toBottomOf="@+id/btnFoodName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/ivBrewDocIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="BrewDog Beer Cathalog"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

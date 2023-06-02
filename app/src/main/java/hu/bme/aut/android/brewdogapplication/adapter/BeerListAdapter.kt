@@ -9,12 +9,13 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.navigation.fragment.findNavController
+import hu.bme.aut.android.brewdogapplication.MainActivity
 import hu.bme.aut.android.brewdogapplication.R
 import hu.bme.aut.android.brewdogapplication.data.BeerListData
 import hu.bme.aut.android.brewdogapplication.databinding.ItemBeerListBinding
 import hu.bme.aut.android.brewdogapplication.ui.beerlist.BeerListFragment
 
-class BeerListAdapter(private val fragment: BeerListFragment): RecyclerView.Adapter<BeerListAdapter.ReportItemViewHolder>() {
+class BeerListAdapter(private val activity: MainActivity): RecyclerView.Adapter<BeerListAdapter.ReportItemViewHolder>() {
     private val items = mutableListOf<BeerListData>()
     private lateinit var binding: ItemBeerListBinding
 
@@ -49,6 +50,6 @@ class BeerListAdapter(private val fragment: BeerListFragment): RecyclerView.Adap
     }
 
     private fun transportToDatasheet(beerListItemId: Int){
-        findNavController(fragment).navigate(R.id.action_fragment_beer_list_to_fragment_beer_details)
+        activity.changeToBeerDatasheet()
     }
 }
