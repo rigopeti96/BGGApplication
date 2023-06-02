@@ -4,12 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import hu.bme.aut.android.brewdogapplication.data.BeerData
 import hu.bme.aut.android.brewdogapplication.data.BeerListData
 import hu.bme.aut.android.brewdogapplication.databinding.MainActivityBinding
 import hu.bme.aut.android.brewdogapplication.network.NetworkManager
 import hu.bme.aut.android.brewdogapplication.ui.beerdetails.BeerDetailsFragment
+import hu.bme.aut.android.brewdogapplication.ui.beerdetails.BeerDetailsViewModel
 import hu.bme.aut.android.brewdogapplication.ui.beerlist.BeerListFragment
+import hu.bme.aut.android.brewdogapplication.ui.beerlist.BeerListViewModel
 import hu.bme.aut.android.brewdogapplication.ui.main.MainFragment
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,13 +23,15 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: MainActivityBinding
-    private var beerList: List<BeerListData> = ArrayList()
-    private var beerDataList: List<BeerData> = ArrayList()
+    private lateinit var beerListViewModel: BeerListViewModel
+    private lateinit var beerDetailsViewModel: BeerDetailsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        beerListViewModel = ViewModelProvider(this)[BeerListViewModel::class.java]
+        beerDetailsViewModel = ViewModelProvider(this)[BeerDetailsViewModel::class.java]
         if (savedInstanceState == null) {
             changeToHome()
         }
@@ -55,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 response: Response<List<BeerListData>?>
             ) {
                 if(response.isSuccessful){
-                    beerList = response.body()!!
+                    beerListViewModel.setBeerDataList(response.body()!!)
                 } else {
                     Log.d("Response",response.body().toString())
                     Toast.makeText(this@MainActivity, "Error: " + response.message(), Toast.LENGTH_LONG).show()
@@ -79,9 +87,8 @@ class MainActivity : AppCompatActivity() {
                 response: Response<List<BeerListData>?>
             )
             {
-                Log.d("Response header",response.headers().toString())
                 if(response.isSuccessful){
-                    beerList = response.body()!!
+                    beerListViewModel.setBeerDataList(response.body()!!)
                 } else {
                     Log.d("Response",response.body().toString())
                     Toast.makeText(this@MainActivity, "Error: " + response.message(), Toast.LENGTH_LONG).show()
@@ -105,9 +112,8 @@ class MainActivity : AppCompatActivity() {
                 response: Response<List<BeerData>?>
             )
             {
-                Log.d("Response header",response.headers().toString())
                 if(response.isSuccessful){
-                   beerDataList = response.body()!!
+                   beerDetailsViewModel.setBeerDataList(response.body()!!)
                 } else {
                     Log.d("Response",response.body().toString())
                     Toast.makeText(this@MainActivity, "Error: " + response.message(), Toast.LENGTH_LONG).show()

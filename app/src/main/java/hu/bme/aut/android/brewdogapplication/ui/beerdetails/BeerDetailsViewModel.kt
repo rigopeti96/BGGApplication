@@ -7,11 +7,13 @@ import hu.bme.aut.android.brewdogapplication.data.BeerData
 import java.util.ArrayList
 
 class BeerDetailsViewModel : ViewModel() {
-    private var BeerListLiveData= MutableLiveData<ArrayList<BeerData>>()
+    private var beerDetailsLiveData = MutableLiveData<List<BeerData>>()
 
-    fun getBeerDataList(): LiveData<ArrayList<BeerData>> {
-        return BeerListLiveData
+    fun getBeerDataList(): LiveData<List<BeerData>> {
+        return beerDetailsLiveData
     }
 
-    //fun setBeerDataList()
+    fun setBeerDataList(actBeerList: List<BeerData>){
+        beerDetailsLiveData.value = actBeerList
+    }
 }

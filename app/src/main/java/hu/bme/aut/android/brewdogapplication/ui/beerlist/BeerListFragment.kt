@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +16,7 @@ import hu.bme.aut.android.brewdogapplication.MainActivity
 import hu.bme.aut.android.brewdogapplication.R
 import hu.bme.aut.android.brewdogapplication.adapter.BeerListAdapter
 import hu.bme.aut.android.brewdogapplication.databinding.BeerListFragmentBinding
+import hu.bme.aut.android.brewdogapplication.ui.beerdetails.BeerDetailsViewModel
 
 
 class BeerListFragment : Fragment() {
@@ -21,6 +24,7 @@ class BeerListFragment : Fragment() {
     private lateinit var binding: BeerListFragmentBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: BeerListAdapter
+    //private val beerListViewModel: BeerListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
