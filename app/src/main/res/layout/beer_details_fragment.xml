@@ -7,11 +7,20 @@
     tools:context=".ui.beerdetails.BeerDetailsFragment">
 
     <TextView
-        android:id="@+id/tvGameTitle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/tvBeerNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Hello"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvBeerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvBeerNameLabel"/>
 
     <TextView
         android:id="@+id/tvGamePublishedYear"
