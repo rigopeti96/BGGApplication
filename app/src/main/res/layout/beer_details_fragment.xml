@@ -7,36 +7,124 @@
     tools:context=".ui.beerdetails.BeerDetailsFragment">
 
     <TextView
+        android:id="@+id/tvBeerTagline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="tvBeerTagline"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
         android:id="@+id/tvBeerNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="tvBeerNameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tvBeerTagline"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/tvBeerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="tvBeerName"
+        app:layout_constraintTop_toBottomOf="@+id/tvBeerTagline"
         app:layout_constraintStart_toEndOf="@+id/tvBeerNameLabel"/>
 
     <TextView
-        android:id="@+id/tvGamePublishedYear"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/tvBeerAbvLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tvBeerAbvLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBeerNameLabel"/>
 
     <TextView
-        android:id="@+id/tvGamePublisher"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/tvBeerAbv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tvBeerAbv"
+        app:layout_constraintTop_toBottomOf="@id/tvBeerName"
+        app:layout_constraintStart_toEndOf="@+id/tvBeerAbvLabel"/>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/tvBeerIbuLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tvBeerIbuLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBeerAbv"/>
+
+    <TextView
+        android:id="@+id/tvBeerIbu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tvBeerIbu"
+        app:layout_constraintTop_toBottomOf="@id/tvBeerAbv"
+        app:layout_constraintStart_toEndOf="@+id/tvBeerIbuLabel"/>
+
+    <TextView
+        android:id="@+id/tvBeerMaltLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tvBeerMaltLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBeerIbu"/>
+
+    <TextView
+        android:id="@+id/tvBeerMalt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tvBeerMalt"
+        app:layout_constraintTop_toBottomOf="@id/tvBeerIbu"
+        app:layout_constraintStart_toEndOf="@+id/tvBeerMaltLabel"/>
+
+    <TextView
+        android:id="@+id/tvBeerHopsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tvBeerHopsLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBeerMaltLabel"/>
+
+    <TextView
+        android:id="@+id/tvBeerHops"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tvBeerHops"
+        app:layout_constraintTop_toBottomOf="@id/tvBeerMalt"
+        app:layout_constraintStart_toEndOf="@+id/tvBeerHopsLabel"/>
+
+    <TextView
+        android:id="@+id/tvBeerYeastLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tvBeerYeastLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBeerHopsLabel"/>
+
+    <TextView
+        android:id="@+id/tvBeerYeast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tvBeerYeast"
+        app:layout_constraintTop_toBottomOf="@id/tvBeerHops"
+        app:layout_constraintStart_toEndOf="@+id/tvBeerYeastLabel"/>
+
+    <TextView
+        android:id="@+id/tvBeerFoodLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tvBeerFoodLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBeerYeastLabel"/>
+
+    <TextView
+        android:id="@+id/tvBeerFood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tvBeerFood"
+        app:layout_constraintTop_toBottomOf="@id/tvBeerYeast"
+        app:layout_constraintStart_toEndOf="@+id/tvBeerFoodLabel"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
