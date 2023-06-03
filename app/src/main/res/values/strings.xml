@@ -8,4 +8,12 @@
     <string name="fragment_beer_details">Beer Details Fragment</string>
     <string name="food_name">Food name</string>
     <string name="beer_name">Beer name</string>
+    <string name="beer_tagline">Beer tagline</string>
+    <string name="abv">ABV</string>
+    <string name="ibu">IBU</string>
+    <string name="malt_list">Malt list</string>
+    <string name="list_of_hops">List of hops</string>
+    <string name="yeast">Yeast</string>
+    <string name="list_of_foods">List of foods</string>
+    <string name="description">Description</string>
 </resources>

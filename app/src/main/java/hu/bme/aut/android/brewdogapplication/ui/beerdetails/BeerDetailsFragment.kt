@@ -39,6 +39,7 @@ class BeerDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getBeerData(28)
         binding.tvBackButton.setOnClickListener {
             (activity as MainActivity).changeToHome()
         }
@@ -48,24 +49,24 @@ class BeerDetailsFragment : Fragment() {
         fun newInstance() = BeerDetailsFragment()
     }
 
-    fun getBeerData(beerId: Int){
+    private fun getBeerData(beerId: Int){
         NetworkManager.getBeerById(beerId).enqueue(object:
-            Callback<List<BeerData>?> {
+            Callback<List<BeerData>> {
             override fun onResponse(
-                call: Call<List<BeerData>?>,
-                response: Response<List<BeerData>?>
+                call: Call<List<BeerData>>,
+                response: Response<List<BeerData>>
             )
             {
                 if(response.isSuccessful){
                     viewModel.setBeerDataList(response.body()!!)
-                    fullFillDatasheet(response.body()!![0])
+                    fullFillDatasheet()
                 } else {
                     Log.d("Response",response.body().toString())
                     Toast.makeText(requireActivity(), "Error: " + response.message(), Toast.LENGTH_LONG).show()
                 }
             }
 
-            override fun onFailure(call: Call<List<BeerData>?>, t: Throwable) {
+            override fun onFailure(call: Call<List<BeerData>>, t: Throwable) {
                 t.printStackTrace()
                 Toast.makeText(requireActivity(), "Network request error occured, check LOG", Toast.LENGTH_LONG).show()
             }
@@ -74,8 +75,9 @@ class BeerDetailsFragment : Fragment() {
         )
     }
 
-    private fun fullFillDatasheet(beerData: BeerData){
-
+    private fun fullFillDatasheet(){
+        val beerData = viewModel.getBeerDataList().value!![0]
+        binding.tvBeerTagline.text = beerData.tagline
+        binding.tvBeerDescription.text = beerData.description
     }
-
 }
