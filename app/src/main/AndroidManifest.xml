@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BGGApplication">
         <activity
-            android:name="hu.bme.aut.android.brewdogapplication.MainActivity"
+            android:name=".ui.beerdetails.BeerDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

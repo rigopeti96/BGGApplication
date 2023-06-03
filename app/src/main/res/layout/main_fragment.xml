@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainFragment">
+    tools:context=".ui.main.MainFragment"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/etBeerName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Beer name"
+        android:hint="@string/beer_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,7 +21,8 @@
         android:id="@+id/btnBeerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Beer name"
+        android:text="@string/beer_name"
+        android:layout_gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etBeerName" />
@@ -29,7 +31,7 @@
         android:id="@+id/etFoodName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Food name"
+        android:hint="@string/food_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnBeerName"/>
@@ -38,27 +40,14 @@
         android:id="@+id/btnFoodName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Food name"
+        android:text="@string/food_name"
+        android:layout_gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etFoodName" />
 
-    <ImageView
-        android:id="@+id/ivBrewDocIcon"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:src="@drawable/brewdog_logo"
-        app:layout_constraintTop_toBottomOf="@+id/btnFoodName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+    <include
+        android:id="@+id/incRecycleView"
+        layout="@layout/content_beerlist" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/ivBrewDocIcon"
-        app:layout_constraintStart_toStartOf="parent"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:text="BrewDog Beer Cathalog"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
