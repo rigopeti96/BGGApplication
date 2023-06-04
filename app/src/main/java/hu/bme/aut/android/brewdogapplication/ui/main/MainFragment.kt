@@ -12,13 +12,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import hu.bme.aut.android.brewdogapplication.MainActivity
+import hu.bme.aut.android.brewdogapplication.R
+import hu.bme.aut.android.brewdogapplication.adapter.BeerListAdapter
 import hu.bme.aut.android.brewdogapplication.data.BeerListData
 import hu.bme.aut.android.brewdogapplication.databinding.MainFragmentBinding
 import hu.bme.aut.android.brewdogapplication.network.NetworkManager
+import hu.bme.aut.android.brewdogapplication.ui.beerdetails.BeerDetailsFragment
+import hu.bme.aut.android.brewdogapplication.ui.beerdetails.BeerDetailsViewModel
 
 class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
     private lateinit var viewModel: MainViewModel
+    private lateinit var beerDetailsViewModel: BeerDetailsViewModel
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: BeerListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,61 +41,33 @@ class MainFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(activity as MainActivity)[MainViewModel::class.java]
+        beerDetailsViewModel = ViewModelProvider(activity as MainActivity)[BeerDetailsViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initRecyclerView()
         binding.btnFoodName.setOnClickListener {
-            getBeerByFoodName()
+            getBeerByFoodName(binding.etFoodName.text.toString())
         }
 
         binding.btnBeerName.setOnClickListener {
-            getBeerByName()
+            getBeerByName(binding.etBeerName.text.toString())
         }
     }
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
-    private fun getBeerByFoodName(){
-        NetworkManager.getBeerListByFood(binding.etUser.text.toString()).enqueue(object:
-            Callback<List<BeerListData>?>{
-                override fun onResponse(
-                    call: Call<List<BeerListData>?>,
-                    response: Response<List<BeerListData>?>
-                ) {
-                    if(response.isSuccessful){
-                        Log.d("Response",response.headers().toString())
-                        val cl: String = response.body().toString()
-                        Log.d("Response body",cl.toString())
-                    } else {
-                        Log.d("Response",response.body().toString())
-                        Toast.makeText(requireContext(), "Error: " + response.message(), Toast.LENGTH_LONG).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<List<BeerListData>?>, t: Throwable) {
-                    t.printStackTrace()
-                    Toast.makeText(requireContext(), "Network request error occured, check LOG", Toast.LENGTH_LONG).show()
-                }
-
-            }
-        )
-    }
-
-    private fun getBeerByName(){
-        NetworkManager.getBeerListByName(binding.etGame.text.toString()).enqueue(object:
-            Callback<List<BeerListData>?>{
+    private fun getBeerByFoodName(foodName: String){
+        NetworkManager.getBeerListByFood(foodName).enqueue(object:
+            Callback<List<BeerListData>?> {
             override fun onResponse(
                 call: Call<List<BeerListData>?>,
                 response: Response<List<BeerListData>?>
-            )
-            {
-                Log.d("Response header",response.headers().toString())
+            ) {
                 if(response.isSuccessful){
-                    Log.d("Response",response.body().toString())
+                    for(i in 0 until response.body()!!.size){
+                        adapter.addBeerItem(response.body()!![i])
+                    }
                 } else {
                     Log.d("Response",response.body().toString())
                     Toast.makeText(requireContext(), "Error: " + response.message(), Toast.LENGTH_LONG).show()
@@ -98,5 +81,43 @@ class MainFragment : Fragment() {
 
         }
         )
+    }
+
+    private fun getBeerByName(beerName: String){
+        NetworkManager.getBeerListByName(beerName).enqueue(object:
+            Callback<List<BeerListData>?> {
+            override fun onResponse(
+                call: Call<List<BeerListData>?>,
+                response: Response<List<BeerListData>?>
+            )
+            {
+                if(response.isSuccessful){
+                    for(i in 0 until response.body()!!.size){
+                        adapter.addBeerItem(response.body()!![i])
+                    }
+                    Log.d("Response size", response.body()!!.size.toString())
+                } else {
+                    Log.d("Response",response.body().toString())
+                    Toast.makeText(requireContext(), "Error: " + response.message(), Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<BeerListData>?>, t: Throwable) {
+                t.printStackTrace()
+                Toast.makeText(requireContext(), "Network request error occured, check LOG", Toast.LENGTH_LONG).show()
+            }
+
+        }
+        )
+    }
+    private fun initRecyclerView() {
+        recyclerView = binding.incRecycleView.rvBeerRecyclerView
+        adapter = BeerListAdapter(activity as MainActivity, beerDetailsViewModel)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext()).apply { }
+        recyclerView.adapter = adapter
+    }
+
+    companion object {
+        fun newInstance() = MainFragment()
     }
 }

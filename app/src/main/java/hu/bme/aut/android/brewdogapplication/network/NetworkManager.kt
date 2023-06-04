@@ -22,7 +22,7 @@ object NetworkManager {
         BREW_DOG_API = retrofit.create(BrewDogAPI::class.java)
     }
 
-    fun getBeerById(id: Int): Call<List<BeerData>?>{
+    fun getBeerById(id: Int): Call<List<BeerData>>{
         return BREW_DOG_API.getBeerDetailsData(id)
     }
 

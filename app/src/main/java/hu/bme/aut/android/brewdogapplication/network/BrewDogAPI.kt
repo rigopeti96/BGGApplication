@@ -8,7 +8,7 @@ interface BrewDogAPI {
     @GET("beers/{id}")
     fun getBeerDetailsData(
         @Path("id") id: Int
-    ): Call<List<BeerData>?>
+    ): Call<List<BeerData>>
 
     @GET("beers")
     fun getBeerListByName(
