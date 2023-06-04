@@ -11,11 +11,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.room.Room
 import hu.bme.aut.android.brewdogapplication.MainActivity
 import hu.bme.aut.android.brewdogapplication.data.BeerData
 import hu.bme.aut.android.brewdogapplication.data.BeerListData
 import hu.bme.aut.android.brewdogapplication.data.Hops
 import hu.bme.aut.android.brewdogapplication.data.Malt
+import hu.bme.aut.android.brewdogapplication.database.Beer
+import hu.bme.aut.android.brewdogapplication.database.BeerDao
+import hu.bme.aut.android.brewdogapplication.database.BeerDatabase
 import hu.bme.aut.android.brewdogapplication.databinding.BeerDetailsFragmentBinding
 import hu.bme.aut.android.brewdogapplication.network.NetworkManager
 import hu.bme.aut.android.brewdogapplication.ui.main.MainFragment
@@ -27,6 +31,7 @@ class BeerDetailsFragment : Fragment() {
     private lateinit var viewModel: BeerDetailsViewModel
     private lateinit var binding: BeerDetailsFragmentBinding
     private var actBeerId = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +49,9 @@ class BeerDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
         actBeerId = viewModel.getBeerId().value!!
         getBeerData(actBeerId)
         binding.tvBackButton.setOnClickListener {
@@ -66,6 +74,7 @@ class BeerDetailsFragment : Fragment() {
                 if(response.isSuccessful){
                     viewModel.setBeerDataList(response.body()!!)
                     fullFillDatasheet()
+                    saveBeerData(response.body()!![0])
                 } else {
                     Log.d("Response",response.body().toString())
                     Toast.makeText(requireActivity(), "Error: " + response.message(), Toast.LENGTH_LONG).show()
@@ -78,6 +87,19 @@ class BeerDetailsFragment : Fragment() {
             }
 
         }
+        )
+    }
+
+    private fun saveBeerData(actBeer: BeerData) {
+        val beer = Beer(
+            actBeer.id,
+            actBeer.name,
+            actBeer.description,
+            actBeer.tagline,
+            actBeer.abv,
+            actBeer.ibu,
+            actBeer.ingredients,
+            actBeer.food_pairing
         )
     }
 
@@ -98,10 +120,12 @@ class BeerDetailsFragment : Fragment() {
     private fun createHopsTextview(hops: List<Hops>): String{
         var listOfHops = ""
         for(i in hops.indices){
-            listOfHops = if(listOfHops ==""){
-                hops[i].name
-            } else {
-                "$listOfHops, ${hops[i].name}"
+            if(!listOfHops.contains(hops[i].name)){
+                listOfHops = if(listOfHops ==""){
+                    hops[i].name
+                } else {
+                    "$listOfHops, ${hops[i].name}"
+                }
             }
         }
 

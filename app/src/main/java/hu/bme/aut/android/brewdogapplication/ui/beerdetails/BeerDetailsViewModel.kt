@@ -4,12 +4,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.room.Room
 import hu.bme.aut.android.brewdogapplication.data.BeerData
 import java.util.ArrayList
 
 class BeerDetailsViewModel : ViewModel() {
     private var beerDetailsLiveData = MutableLiveData<List<BeerData>>()
     private var beerId = MutableLiveData<Int>()
+
 
     fun getBeerDataList(): LiveData<List<BeerData>> {
         return beerDetailsLiveData

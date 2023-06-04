@@ -15,6 +15,9 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import hu.bme.aut.android.brewdogapplication.MainActivity
 import hu.bme.aut.android.brewdogapplication.R
 import hu.bme.aut.android.brewdogapplication.adapter.BeerListAdapter
@@ -31,7 +34,7 @@ class MainFragment : Fragment() {
     private lateinit var beerDetailsViewModel: BeerDetailsViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: BeerListAdapter
-
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,12 +53,16 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+        firebaseAnalytics = Firebase.analytics
         binding.btnFoodName.setOnClickListener {
             try {
                 if(binding.etFoodName.text.isEmpty()){
                     throw EmptyEditTextException("Food name edit text is empty!")
                 }
                 getBeerByFoodName(binding.etFoodName.text.toString())
+                val bundle = Bundle()
+                bundle.putString(FirebaseAnalytics.Param.SEARCH_TERM, binding.etFoodName.text.toString())
+                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SEARCH, bundle)
             } catch (e: EmptyEditTextException){
                 Toast.makeText(requireContext(), resources.getText(R.string.food_name_error), Toast.LENGTH_LONG).show()
             }
@@ -69,7 +76,7 @@ class MainFragment : Fragment() {
                 }
                 getBeerByName(binding.etBeerName.text.toString())
             } catch (e: EmptyEditTextException){
-                Toast.makeText(requireContext(), resources.getText(R.string.food_name_error), Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), resources.getText(R.string.beer_name_error), Toast.LENGTH_LONG).show()
             }
 
         }

@@ -10,11 +10,16 @@ import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import androidx.room.Room
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
 import hu.bme.aut.android.brewdogapplication.data.BeerData
 import hu.bme.aut.android.brewdogapplication.data.BeerListData
+import hu.bme.aut.android.brewdogapplication.database.Beer
+import hu.bme.aut.android.brewdogapplication.database.BeerDao
+import hu.bme.aut.android.brewdogapplication.database.BeerDatabase
 import hu.bme.aut.android.brewdogapplication.databinding.MainActivityBinding
 import hu.bme.aut.android.brewdogapplication.network.NetworkManager
 import hu.bme.aut.android.brewdogapplication.ui.beerdetails.BeerDetailsFragment
@@ -27,7 +32,6 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: MainActivityBinding
     private lateinit var beerDetailsViewModel: BeerDetailsViewModel
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +67,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, MainFragment.newInstance())
             .commitNow()
-
     }
 
     fun changeToBeerDatasheet(){

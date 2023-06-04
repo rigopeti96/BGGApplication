@@ -28,11 +28,9 @@ import hu.bme.aut.android.brewdogapplication.ui.main.MainViewModel
 class BeerListAdapter(private val activity: MainActivity, private val beerDetailsViewModel: BeerDetailsViewModel): RecyclerView.Adapter<BeerListAdapter.ReportItemViewHolder>() {
     private val items = mutableListOf<BeerListData>()
     private lateinit var binding: ItemBeerListBinding
-    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReportItemViewHolder {
         binding = ItemBeerListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        firebaseAnalytics = Firebase.analytics
         return ReportItemViewHolder(binding.root)
     }
 
@@ -63,11 +61,6 @@ class BeerListAdapter(private val activity: MainActivity, private val beerDetail
 
     private fun transportToDatasheet(itemId: Int, itemName: String){
         beerDetailsViewModel.setBeerId(itemId)
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT){
-            param(FirebaseAnalytics.Param.ITEM_ID, itemId.toString())
-            param(FirebaseAnalytics.Param.ITEM_NAME, itemName)
-        }
-
         activity.changeToBeerDatasheet()
     }
 
