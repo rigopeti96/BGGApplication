@@ -20,6 +20,7 @@ import hu.bme.aut.android.brewdogapplication.R
 import hu.bme.aut.android.brewdogapplication.adapter.BeerListAdapter
 import hu.bme.aut.android.brewdogapplication.data.BeerListData
 import hu.bme.aut.android.brewdogapplication.databinding.MainFragmentBinding
+import hu.bme.aut.android.brewdogapplication.exception.EmptyEditTextException
 import hu.bme.aut.android.brewdogapplication.network.NetworkManager
 import hu.bme.aut.android.brewdogapplication.ui.beerdetails.BeerDetailsFragment
 import hu.bme.aut.android.brewdogapplication.ui.beerdetails.BeerDetailsViewModel
@@ -30,6 +31,7 @@ class MainFragment : Fragment() {
     private lateinit var beerDetailsViewModel: BeerDetailsViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: BeerListAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,11 +51,27 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         binding.btnFoodName.setOnClickListener {
-            getBeerByFoodName(binding.etFoodName.text.toString())
+            try {
+                if(binding.etFoodName.text.isEmpty()){
+                    throw EmptyEditTextException("Food name edit text is empty!")
+                }
+                getBeerByFoodName(binding.etFoodName.text.toString())
+            } catch (e: EmptyEditTextException){
+                Toast.makeText(requireContext(), resources.getText(R.string.food_name_error), Toast.LENGTH_LONG).show()
+            }
+
         }
 
         binding.btnBeerName.setOnClickListener {
-            getBeerByName(binding.etBeerName.text.toString())
+            try {
+                if(binding.etBeerName.text.isEmpty()){
+                    throw EmptyEditTextException("Beer name edit text is empty!")
+                }
+                getBeerByName(binding.etBeerName.text.toString())
+            } catch (e: EmptyEditTextException){
+                Toast.makeText(requireContext(), resources.getText(R.string.food_name_error), Toast.LENGTH_LONG).show()
+            }
+
         }
     }
 
