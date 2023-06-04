@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.navigation.fragment.findNavController
@@ -14,8 +15,12 @@ import hu.bme.aut.android.brewdogapplication.MainActivity
 import hu.bme.aut.android.brewdogapplication.R
 import hu.bme.aut.android.brewdogapplication.data.BeerListData
 import hu.bme.aut.android.brewdogapplication.databinding.ItemBeerListBinding
+import hu.bme.aut.android.brewdogapplication.ui.beerdetails.BeerDetailsFragment
+import hu.bme.aut.android.brewdogapplication.ui.beerdetails.BeerDetailsViewModel
+import hu.bme.aut.android.brewdogapplication.ui.main.MainFragment
+import hu.bme.aut.android.brewdogapplication.ui.main.MainViewModel
 
-class BeerListAdapter(private val activity: MainActivity): RecyclerView.Adapter<BeerListAdapter.ReportItemViewHolder>() {
+class BeerListAdapter(private val activity: MainActivity, private val beerDetailsViewModel: BeerDetailsViewModel): RecyclerView.Adapter<BeerListAdapter.ReportItemViewHolder>() {
     private val items = mutableListOf<BeerListData>()
     private lateinit var binding: ItemBeerListBinding
 
@@ -49,7 +54,8 @@ class BeerListAdapter(private val activity: MainActivity): RecyclerView.Adapter<
         }
     }
 
-    private fun transportToDatasheet(beerListItemId: Int){
+    private fun transportToDatasheet(itemId: Int){
+        beerDetailsViewModel.setBeerId(itemId)
         activity.changeToBeerDatasheet()
     }
 

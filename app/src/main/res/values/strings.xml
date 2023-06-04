@@ -1,19 +1,20 @@
 <resources>
-    <string name="app_name">BrewDogApplication</string>
+    <string name="app_name">BrewDog Beerlist</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="back">Back</string>
+    <string name="back">&lt; Back</string>
     <string name="fragment_main">Main Fragment</string>
     <string name="fragment_beer_list">Beer List Fragment</string>
     <string name="fragment_beer_details">Beer Details Fragment</string>
     <string name="food_name">Food name</string>
     <string name="beer_name">Beer name</string>
+    <string name="beer_name_tag">Beer name:</string>
     <string name="beer_tagline">Beer tagline</string>
-    <string name="abv">ABV</string>
-    <string name="ibu">IBU</string>
-    <string name="malt_list">Malt list</string>
-    <string name="list_of_hops">List of hops</string>
-    <string name="yeast">Yeast</string>
-    <string name="list_of_foods">List of foods</string>
+    <string name="abv">ABV:</string>
+    <string name="ibu">IBU:</string>
+    <string name="malt_list">Malt list:</string>
+    <string name="list_of_hops">List of hops:</string>
+    <string name="yeast">Yeast:</string>
+    <string name="list_of_foods">List of foods:</string>
     <string name="description">Description</string>
 </resources>

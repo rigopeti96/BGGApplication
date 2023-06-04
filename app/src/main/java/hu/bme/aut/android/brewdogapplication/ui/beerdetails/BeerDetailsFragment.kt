@@ -1,5 +1,6 @@
 package hu.bme.aut.android.brewdogapplication.ui.beerdetails
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -13,6 +14,8 @@ import androidx.fragment.app.viewModels
 import hu.bme.aut.android.brewdogapplication.MainActivity
 import hu.bme.aut.android.brewdogapplication.data.BeerData
 import hu.bme.aut.android.brewdogapplication.data.BeerListData
+import hu.bme.aut.android.brewdogapplication.data.Hops
+import hu.bme.aut.android.brewdogapplication.data.Malt
 import hu.bme.aut.android.brewdogapplication.databinding.BeerDetailsFragmentBinding
 import hu.bme.aut.android.brewdogapplication.network.NetworkManager
 import hu.bme.aut.android.brewdogapplication.ui.main.MainFragment
@@ -23,6 +26,7 @@ import retrofit2.Response
 class BeerDetailsFragment : Fragment() {
     private lateinit var viewModel: BeerDetailsViewModel
     private lateinit var binding: BeerDetailsFragmentBinding
+    private var actBeerId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,12 +38,14 @@ class BeerDetailsFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        viewModel = ViewModelProvider(this)[BeerDetailsViewModel::class.java]
+        viewModel = ViewModelProvider(activity as MainActivity)[BeerDetailsViewModel::class.java]
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getBeerData(28)
+        actBeerId = viewModel.getBeerId().value!!
+        getBeerData(actBeerId)
         binding.tvBackButton.setOnClickListener {
             (activity as MainActivity).changeToHome()
         }
@@ -75,9 +81,56 @@ class BeerDetailsFragment : Fragment() {
         )
     }
 
+    @SuppressLint("SetTextI18n")
     private fun fullFillDatasheet(){
         val beerData = viewModel.getBeerDataList().value!![0]
         binding.tvBeerTagline.text = beerData.tagline
+        binding.tvBeerName.text = beerData.name
+        binding.tvBeerIbu.text = beerData.ibu.toString()
+        binding.tvBeerAbv.text = "${beerData.abv} %"
+        binding.tvBeerHops.text = createHopsTextview(beerData.ingredients.hops)
+        binding.tvBeerMalt.text = createMaltTextview(beerData.ingredients.malt)
+        binding.tvBeerYeast.text = beerData.ingredients.yeast
+        binding.tvBeerFood.text = createFoodlistTextview(beerData.food_pairing)
         binding.tvBeerDescription.text = beerData.description
+    }
+
+    private fun createHopsTextview(hops: List<Hops>): String{
+        var listOfHops = ""
+        for(i in hops.indices){
+            listOfHops = if(listOfHops ==""){
+                hops[i].name
+            } else {
+                "$listOfHops, ${hops[i].name}"
+            }
+        }
+
+        return listOfHops
+    }
+
+    private fun createMaltTextview(malt: List<Malt>): String{
+        var listOfMalt = ""
+        for(i in malt.indices){
+            listOfMalt = if(listOfMalt ==""){
+                malt[i].name
+            } else {
+                "$listOfMalt, ${malt[i].name}"
+            }
+        }
+
+        return listOfMalt
+    }
+
+    private fun createFoodlistTextview(foods: List<String>): String{
+        var listOfMalt = ""
+        for(i in foods.indices){
+            listOfMalt = if(listOfMalt ==""){
+                foods[i]
+            } else {
+                "$listOfMalt, ${foods[i]}"
+            }
+        }
+
+        return listOfMalt
     }
 }

@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BGGApplication">
         <activity
-            android:name=".ui.beerdetails.BeerDetailsActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

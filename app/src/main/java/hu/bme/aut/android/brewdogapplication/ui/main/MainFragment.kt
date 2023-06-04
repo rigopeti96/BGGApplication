@@ -21,10 +21,13 @@ import hu.bme.aut.android.brewdogapplication.adapter.BeerListAdapter
 import hu.bme.aut.android.brewdogapplication.data.BeerListData
 import hu.bme.aut.android.brewdogapplication.databinding.MainFragmentBinding
 import hu.bme.aut.android.brewdogapplication.network.NetworkManager
+import hu.bme.aut.android.brewdogapplication.ui.beerdetails.BeerDetailsFragment
+import hu.bme.aut.android.brewdogapplication.ui.beerdetails.BeerDetailsViewModel
 
 class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
     private lateinit var viewModel: MainViewModel
+    private lateinit var beerDetailsViewModel: BeerDetailsViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: BeerListAdapter
 
@@ -38,7 +41,8 @@ class MainFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(activity as MainActivity)[MainViewModel::class.java]
+        beerDetailsViewModel = ViewModelProvider(activity as MainActivity)[BeerDetailsViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -108,7 +112,7 @@ class MainFragment : Fragment() {
     }
     private fun initRecyclerView() {
         recyclerView = binding.incRecycleView.rvBeerRecyclerView
-        adapter = BeerListAdapter(activity as MainActivity)
+        adapter = BeerListAdapter(activity as MainActivity, beerDetailsViewModel)
         recyclerView.layoutManager = LinearLayoutManager(requireContext()).apply { }
         recyclerView.adapter = adapter
     }
